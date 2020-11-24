@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1 style="font-size: 40px; color:aqua">Esta es una pagina Principal</h1>
-</body>
-</html>
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+    Principal
+{% endblock %}
+
+
+{% block content %} 
+    <h1>En la pagina de Principal </h1>
+    <h2>Con layouts</h2>
+{% endblock %}
