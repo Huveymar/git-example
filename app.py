@@ -62,4 +62,37 @@ def crear_usuarios():
 
     return redirect(url_for('usuarios'))
 
+#-----------------------------------------
+
+@app.route('/usuarios/eliminar', methods=['GET','POST'])
+def eliminar():
+    if request.method == 'GET':
+        return render_template('usuarios/eliminar.html')
+    id=request.form.get('id')
+    db = sqlite3.connect('data.db')
+    cursor = db.cursor()
+    cursor.execute("""DELETE FROM usuarios where id=?""",(id))
+    db.commit()
+    return redirect(url_for('usuarios'))
+#----------------------------------------
+@app.route('/usuarios/editar', methods=['GET','POST'])
+def editar():
+    if request.method == 'GET':
+        return render_template('usuarios/editar.html')
+    Id=request.form.get('id')
+    NewNombres=request.form.get('nombres')
+    NewApellidos=request.form.get('apellidos')
+    NewEmail=request.form.get('email')
+    NewPassword=request.form.get('password')
+    cursor = db.cursor()
+    cursor.execute("""UPDATE Usuarios SET
+                nombres=?,
+                apellidos=?, 
+                email=?,
+                password=?
+                WHERE id=?
+    """,(NewNombres,NewApellidos,NewEmail,NewPassword,Id))
+    db.commit()
+    return redirect(url_for('usuarios'))
+
 app.run(debug=True, port=5100)
